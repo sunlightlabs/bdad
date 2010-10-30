@@ -4,11 +4,6 @@
 #new_sketch_page
   #picture_frame
     #stage
-    #welcome_dialog(title="Can you better draw a district?")
-      :markdown
-        Click and drag to **draw shapes** on the map.
-
-        Scroll down to title and save your drawing.
     = form_for @sketch do |f|
       = hidden_field_tag :sketch_token, @sketch.token
       = hidden_field_tag :combined_code, @sketch.district.combined_code
