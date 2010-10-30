@@ -1,0 +1,21 @@
+- @page_title = "Sketches"
+%section#main
+  %h1 Sketches
+  - if @sketches.empty?
+    %p No results found.
+  - else
+    %table
+      %thead
+        %th Token
+        %th Title
+        %th Byline
+        %th District
+        %th Updated At
+      %tbody
+        - @sketches.each do |sketch|
+          %tr
+            %td.token= link_to(sketch.token, sketch_path(sketch))
+            %td= sketch.title
+            %td= sketch.byline
+            %td= sketch.district.combined_code
+            %td.timestamp= sketch.updated_at

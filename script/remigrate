@@ -1,0 +1,2 @@
+rake db:migrate VERSION=1_create_sketches
+rake db:migrate

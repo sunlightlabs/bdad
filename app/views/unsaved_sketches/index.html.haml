@@ -1,0 +1,19 @@
+- @page_title = "Unsaved Sketches"
+%section#main
+  %h1 Unsaved Sketches
+  - if @unsaved_sketches.empty?
+    %p No results found.
+  - else
+    %table
+      %thead
+        %th Token
+        %th Paths
+        %th District
+        %th Updated At
+      %tbody
+        - @unsaved_sketches.each do |unsaved_sketch|
+          %tr
+            %td.token= link_to(unsaved_sketch.token, unsaved_sketch_path(unsaved_sketch))
+            %td= truncate(unsaved_sketch.paths, :length => 20)
+            %td= unsaved_sketch.district.combined_code
+            %td.timestamp= unsaved_sketch.updated_at

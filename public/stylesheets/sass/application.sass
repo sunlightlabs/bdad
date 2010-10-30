@@ -1,0 +1,289 @@
+// === colors ===
+
+$link_color: #000000
+$page_background_color: #3E1C01
+$footer_background_color: #3E1C01
+
+$button_clicked_background_color: #E3E4E6
+$button_background_color: #F3F4F6
+$button_border_color: #4E78AA
+$button_color: #4E78AA
+$button_hover_background_color: #F3F4F6
+$button_shadow_color: #A0A0A0
+
+$page_width: 884px
+
+// === links ===
+
+@mixin link
+  color: $link_color
+  outline: none
+a:link
+  @include link
+  // text-decoration: none
+a:visited, a:hover, a:active
+  @include link
+
+// === fonts ===
+
+@font-face
+  font-family: "chunk"
+  font-style: normal
+  src: url(../fonts/chunk_five_roman.otf) format("opentype")
+
+// === shared ===
+
+.clear
+  clear: both
+strong
+  font-weight: bold
+body
+  font-family: Georgia, Times, "Times New Roman", serif
+  background: $page_background_color
+#body_wrapper
+  background: #FCEDD6 url(../images/bg-top.jpg) top center no-repeat
+#main_wrapper
+  padding: 10px 0
+  margin: 0 auto
+  width: $page_width
+table
+  background-color: #FFFFFF
+  width: 100%
+  td, th
+    text-align: left
+    padding: 5px
+  tbody
+    tr
+      border-top: 1px solid #FCEDD6
+      td
+      td.token, td.timestamp
+        font-family: monospace
+
+@mixin section_header
+  color: #0054A4
+  font-family: "chunk", sans-serif
+  font-size: 120%
+  margin: 0 30px
+  text-align: center
+
+// === shared: buttons ===
+
+@mixin drawing_button
+  bottom: 16px
+  position: absolute
+  width: 100px
+  z-index: 10
+
+@mixin button_shadow
+  box-shadow: 0 1px 1px $button_shadow_color
+  -webkit-box-shadow: 0 1px 1px $button_shadow_color
+  -o-box-shadow: 0 1px 1px $button_shadow_color
+  -moz-box-shadow: 0 1px 1px $button_shadow_color
+
+@mixin no_button_shadow
+  box-shadow: none
+  -webkit-box-shadow: none
+  -o-box-shadow: none
+  -moz-box-shadow: none
+
+button
+  @include button_shadow
+  background-color: $button_background_color
+  border-radius: 10px
+  border: 1px solid $button_border_color
+  color: $button_color
+  font-size: 12px
+  padding: 3px 0
+button:hover
+  background-color: $button_hover_background_color
+button#save_drawing
+  width: 100px
+button.pressed
+  background-color: $button_clicked_background_color
+#welcome_dialog
+  p + p
+    margin-top: 16px
+
+// === header ===
+
+header
+  .wrapper
+    margin: 0 auto
+    width: $page_width
+    img.swirl
+      float: left
+      height: 75px
+      width: 281px
+    h1
+      a
+        img
+          display: block
+          float: left
+          height: 91px
+          margin: 0 20px
+          width: 281px
+
+// === stage ===
+
+#picture_frame
+  background: url(../images/frame_big.png) top left no-repeat
+  height: 480px
+  margin: 10px auto 10px
+  padding: 60px 80px 70px
+  position: relative
+  width: 645px
+  #stage
+    background-color: #EEEEEE
+    border: 3px solid #A0A0A0
+    height: 480px
+    position: absolute
+    width: 640px
+    z-index: 0
+  button#undo_last_path
+    @include drawing_button
+    left: 70px
+  button#clear_all_paths
+    @include drawing_button
+    right: 70px
+
+div#new_sketch_page, div#edit_sketch_page
+  #picture_frame
+    cursor: crosshair
+
+div#show_sketch_page
+  #picture_frame
+    cursor: default
+
+// === below stage ===
+
+div#new_sketch_page, div#edit_sketch_page
+  div#below_stage
+    form.new_sketch, form.edit_sketch
+      margin: 0 auto
+      width: 400px
+      text-align: center
+      div#brass_plate
+        background: url(../images/brass_plate.png) top left no-repeat
+        height: 64px
+        text-align: center
+        width: 400px
+        padding: 10px 0 0
+        input#sketch_title
+          display: block
+          font-size: 18px
+          margin: 0 auto
+          text-align: center
+          width: 320px
+        .by
+          display: block
+          font-size: 10px
+        input#sketch_byline
+          display: block
+          font-size: 12px
+          margin: 0 auto
+          text-align: center
+          width: 160px
+
+div#show_sketch_page
+  div#below_stage
+    margin: 0 auto
+    width: 400px
+    div#brass_plate
+      background: url(../images/brass_plate.png) top left no-repeat
+      height: 64px
+      text-align: center
+      width: 400px
+      padding: 10px 0 0
+      #sketch_title
+        display: block
+        font-size: 18px
+        margin: 0 auto
+        text-align: center
+        width: 320px
+      .by
+        display: block
+        font-size: 10px
+        padding: 2px 0 0
+      #sketch_byline
+        display: block
+        font-size: 12px
+        margin: 0 auto
+        padding: 4px 0 0
+        text-align: center
+        width: 160px
+
+#population_estimate
+  margin: 20px auto 0
+  width: 400px
+  h1
+    @include section_header
+  p
+    text-align: center
+  p#population_value
+    font-size: 120%
+
+#about_the_app
+  margin: 20px auto 0
+  width: 400px
+  h1
+    @include section_header
+  p
+    text-align: center
+
+// === gallery ===
+
+$gallery_items: 4
+$gallery_item_total_width: floor($page_width / $gallery_items)
+$gallery_aspect_ratio: 640 / 480
+$gallery_item_gutter: 10px
+$gallery_item_border: 1px
+$gallery_item_inside_width: $gallery_item_total_width - 2 * $gallery_item_gutter
+$gallery_item_inside_height: round($gallery_item_inside_width / $gallery_aspect_ratio)
+
+#gallery
+  margin: 20px auto 0
+  width: $gallery_item_total_width * $gallery_items
+  h1
+    @include section_header
+  .sketch
+    float: left
+    background-color: #EEEEEE
+    border: $gallery_item_border solid #A0A0A0
+    margin: $gallery_item_gutter - $gallery_item_border
+    height: $gallery_item_inside_height
+    width: $gallery_item_inside_width
+    z-index: 0
+
+// === other stuff / other pages ===
+
+section#main
+  margin: 30px auto 10px
+  width: 805px
+  text-align: center
+  h1
+    @include section_header
+  p
+    text-align: center
+
+// === footer ===
+
+footer
+  background: $footer_background_color url(../images/bg-bottom.jpg) top left repeat-x
+  .wrapper
+    margin: 0 auto
+    padding: 30px 0
+    width: 300px + (2 * 76px)
+    img.swirl
+      float: left
+      height: 20px
+      width: 76px
+    h1
+      color: #7d481e
+      float: left
+      font-family: "chunk", serif
+      font-size: 16px
+      font-style: normal
+      margin: 2px 0 0
+      padding: 0
+      text-align: center
+      width: 300px

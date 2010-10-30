@@ -1,0 +1,28 @@
+- @page_title = "%s by %s" % [@sketch.title, @sketch.byline]
+- content_for :javascript do
+  = javascript_include_tag 'show_sketch.js'
+#show_sketch_page
+  #picture_frame
+    #stage
+  #below_stage
+    %form
+      = hidden_field_tag :sketch_token, @sketch.token
+      = hidden_field_tag :combined_code, @sketch.district.combined_code
+      = hidden_field_tag :sketch_paths, @sketch.paths
+    #brass_plate
+      #sketch_title= @sketch.title
+      .by by
+      #sketch_byline= @sketch.byline
+
+  .clear
+  %section#population_estimate
+    %h1 Population
+    %p#population_value= number_with_delimiter(@sketch.population)
+  %section#about_the_app
+    %h1 About
+    %p
+      :markdown
+        Congressional districts sometimes have weird, even non-sensical shapes!
+        Here you can have some fun with them. Pick a district, tag it (graffiti
+        style), and give it a killer name. When you're done, save it to the
+        gallery.
