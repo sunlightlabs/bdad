@@ -2,6 +2,7 @@ set :application, 'bdad'
 set :repository,  'git@github.com:djsun/bdad.git'
 set :scm,         :git
 set :user,        'bdad'
+set :use_sudo,    false
 set :deploy_via,  :remote_cache
 set :deploy_to,   '/projects/bdad/src/bdad'
 set :domain,      'dupont-bdad' # see .ssh/config
