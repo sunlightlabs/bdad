@@ -4,26 +4,23 @@
 #new_sketch_page
   #picture_frame
     #stage
-    %button#undo_last_path(type:button) Undo
-    %button#clear_all_paths(type:button) Start Over
     #welcome_dialog(title="Can you better draw a district?")
       :markdown
         Click and drag to **draw shapes** on the map.
 
         Scroll down to title and save your drawing.
-  #below_stage
     = form_for @sketch do |f|
       = hidden_field_tag :sketch_token, @sketch.token
       = hidden_field_tag :combined_code, @sketch.district.combined_code
-      #brass_plate
-        = f.text_field :title, :placeholder => fun_title(@sketch.district)
-        .by by
-        = f.text_field :byline, :placeholder => fun_name()
-      %button#save_drawing(type:submit) Save Drawing
+      = f.text_field :title, :placeholder => fun_title(@sketch.district)
+      = f.text_field :byline, :placeholder => fun_name
+      %button#save_drawing(type:submit) Save
+    #population_estimate
+      %p#population_label Population
+      %p#population_value 0
+    %button#undo_last_path(type:button) Undo
+    %button#clear_all_paths(type:button) Clear
   .clear
-  %section#population_estimate
-    %h1 Population
-    %p#population_value 0
   %section#about_the_app
     %h1 About
     %p

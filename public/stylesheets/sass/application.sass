@@ -9,7 +9,7 @@ $button_background_color: #F3F4F6
 $button_border_color: #4E78AA
 $button_color: #4E78AA
 $button_hover_background_color: #F3F4F6
-$button_shadow_color: #A0A0A0
+$button_shadow_color: #606060
 
 $page_width: 884px
 
@@ -68,12 +68,6 @@ table
 
 // === shared: buttons ===
 
-@mixin drawing_button
-  bottom: 16px
-  position: absolute
-  width: 100px
-  z-index: 10
-
 @mixin button_shadow
   box-shadow: 0 1px 1px $button_shadow_color
   -webkit-box-shadow: 0 1px 1px $button_shadow_color
@@ -96,8 +90,6 @@ button
   padding: 3px 0
 button:hover
   background-color: $button_hover_background_color
-button#save_drawing
-  width: 100px
 button.pressed
   background-color: $button_clicked_background_color
 #welcome_dialog
@@ -125,26 +117,63 @@ header
 
 // === stage ===
 
+$frame_width: 800px
+$frame_height: 653px
+$stage_border: 5px
+$frame_button_height: 20px
+$frame_button_width: 55px
+
+@mixin frame_button
+  position: absolute
+  width: $frame_button_width
+
 #picture_frame
-  background: url(../images/frame_big.png) top left no-repeat
-  height: 480px
-  margin: 10px auto 10px
-  padding: 60px 80px 70px
+  background: url(../images/frame_800x653.jpg) top left no-repeat
+  border: 2px solid black
+  height: $frame_height
+  margin: 10px auto
+  padding: 0
   position: relative
-  width: 645px
+  width: $frame_width
   #stage
+    left: 76px
+    top: 75px
+    height: 501px - (2 * $stage_border)
+    width: 652px - (2 * $stage_border)
+    border: $stage_border solid #404040
     background-color: #EEEEEE
-    border: 3px solid #A0A0A0
-    height: 480px
     position: absolute
-    width: 640px
-    z-index: 0
   button#undo_last_path
-    @include drawing_button
-    left: 70px
+    @include frame_button
+    height: $frame_button_height
+    left: 6px
+    top: ($frame_height / 2) - ($frame_button_height / 2) - ($frame_button_height)
   button#clear_all_paths
-    @include drawing_button
-    right: 70px
+    @include frame_button
+    height: $frame_button_height
+    left: 6px
+    top: ($frame_height / 2) - ($frame_button_height / 2) + ($frame_button_height)
+    width: $frame_button_width
+  button#save_drawing
+    @include frame_button
+    height: $frame_button_height * 2
+    top: ($frame_height / 2) - ($frame_button_height)
+    width: $frame_button_width
+    right: 4px
+    font-weight: bold
+  #population_estimate
+    background-color: #FFFFFF
+    border: 2px solid #D4B64B
+    color: #000000
+    position: absolute
+    left: 68px
+    text-align: center
+    top: 600px
+    width: 200px
+    #population_label
+      font-size: 80%
+    #population_value
+      font-size: 120%
 
 div#new_sketch_page, div#edit_sketch_page
   #picture_frame
@@ -154,73 +183,45 @@ div#show_sketch_page
   #picture_frame
     cursor: default
 
-// === below stage ===
+@mixin sketch_input_control
+  background-color: #FFFFFF
+  border: 2px solid #D4B64B
+  color: #000000
+  display: block
+  position: absolute
+  text-align: center
+
+@mixin sketch_title
+  @include sketch_input_control
+  font-size: 24px
+  left: ($frame_width / 2) - 250px
+  top: 15px
+  width: 500px
+
+@mixin sketch_byline
+  @include sketch_input_control
+  font-size: 16px
+  right: 68px
+  top: 600px
+  width: 200px
+  height: 35px
 
 div#new_sketch_page, div#edit_sketch_page
-  div#below_stage
+  #picture_frame
     form.new_sketch, form.edit_sketch
-      margin: 0 auto
-      width: 400px
-      text-align: center
-      div#brass_plate
-        background: url(../images/brass_plate.png) top left no-repeat
-        height: 64px
-        text-align: center
-        width: 400px
-        padding: 10px 0 0
-        input#sketch_title
-          display: block
-          font-size: 18px
-          margin: 0 auto
-          text-align: center
-          width: 320px
-        .by
-          display: block
-          font-size: 10px
-        input#sketch_byline
-          display: block
-          font-size: 12px
-          margin: 0 auto
-          text-align: center
-          width: 160px
+      input#sketch_title
+        @include sketch_title
+      input#sketch_byline
+        @include sketch_byline
 
 div#show_sketch_page
-  div#below_stage
-    margin: 0 auto
-    width: 400px
-    div#brass_plate
-      background: url(../images/brass_plate.png) top left no-repeat
-      height: 64px
-      text-align: center
-      width: 400px
-      padding: 10px 0 0
-      #sketch_title
-        display: block
-        font-size: 18px
-        margin: 0 auto
-        text-align: center
-        width: 320px
-      .by
-        display: block
-        font-size: 10px
-        padding: 2px 0 0
-      #sketch_byline
-        display: block
-        font-size: 12px
-        margin: 0 auto
-        padding: 4px 0 0
-        text-align: center
-        width: 160px
-
-#population_estimate
-  margin: 20px auto 0
-  width: 400px
-  h1
-    @include section_header
-  p
-    text-align: center
-  p#population_value
-    font-size: 120%
+  #picture_frame
+    #sketch_title
+      @include sketch_title
+    #sketch_byline
+      @include sketch_byline
+      padding-top: 8px
+      height: 35px - 8px
 
 #about_the_app
   margin: 20px auto 0
@@ -252,7 +253,6 @@ $gallery_item_inside_height: round($gallery_item_inside_width / $gallery_aspect_
     margin: $gallery_item_gutter - $gallery_item_border
     height: $gallery_item_inside_height
     width: $gallery_item_inside_width
-    z-index: 0
 
 // === other stuff / other pages ===
 

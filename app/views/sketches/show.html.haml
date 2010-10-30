@@ -4,20 +4,16 @@
 #show_sketch_page
   #picture_frame
     #stage
-  #below_stage
     %form
       = hidden_field_tag :sketch_token, @sketch.token
       = hidden_field_tag :combined_code, @sketch.district.combined_code
       = hidden_field_tag :sketch_paths, @sketch.paths
-    #brass_plate
-      #sketch_title= @sketch.title
-      .by by
-      #sketch_byline= @sketch.byline
-
+    #sketch_title= @sketch.title
+    #sketch_byline= @sketch.byline
+    #population_estimate
+      %p#population_label Population
+      %p#population_value= number_with_delimiter(@sketch.population)
   .clear
-  %section#population_estimate
-    %h1 Population
-    %p#population_value= number_with_delimiter(@sketch.population)
   %section#about_the_app
     %h1 About
     %p
