@@ -200,7 +200,9 @@
       var start = function() {
         intervalID = setInterval(step, settings.replayInterval);
       };
-      setTimeout(start, settings.zoomDuration);
+      if(ni > 0) {
+        setTimeout(start, settings.zoomDuration);
+      }
     };
 
     var enableSketchPad = function(svg, parentGroup) {
