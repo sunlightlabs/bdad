@@ -17,7 +17,7 @@
         population      : null, // jQuery selector to an element
       },
       replaySketch      : null, // Replay sketch (if sketchPaths present)
-      replayInterval    : 10,   // Replay delay (if replayDelay is true)
+      replayInterval    : 5,    // Replay delay (if replayDelay is true)
       savePath          : null, // 'unsaved_sketches'
       authenticityToken : null, // Cross Site Request Forgery Token
       controls : {
