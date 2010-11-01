@@ -51,12 +51,36 @@ table
   td, th
     text-align: left
     padding: 5px
+  thead
+    tr
+      th
+      th.reviewed
+        font-size: 10px
+        text-align: center
+      th.appropriate
+        font-size: 10px
+        text-align: center
+      th.gallery
+        font-size: 10px
+        text-align: center
   tbody
     tr
       border-top: 1px solid #FCEDD6
       td
-      td.token, td.timestamp
+      td.reviewed
+        text-align: center
+      td.appropriate
+        text-align: center
+      td.gallery
+        text-align: center
+      td.token
         font-family: monospace
+      td.timestamp
+        font-family: monospace
+  .yes
+    color: green
+  .no
+    color: red
 
 @mixin section_header
   color: #0054A4

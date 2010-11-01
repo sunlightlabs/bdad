@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 3) do
+ActiveRecord::Schema.define(:version => 4) do
 
   create_table "awards", :id => false, :force => true do |t|
     t.string   "name",      :limit => nil
@@ -76,9 +76,15 @@ ActiveRecord::Schema.define(:version => 3) do
     t.datetime      "created_at"
     t.datetime      "updated_at"
     t.multi_polygon "geometry",    :limit => nil
+    t.boolean       "reviewed",                   :default => false
+    t.boolean       "appropriate",                :default => false
+    t.boolean       "gallery",                    :default => false
   end
 
+  add_index "sketches", ["appropriate"], :name => "index_sketches_on_appropriate"
   add_index "sketches", ["district_id"], :name => "index_sketches_on_district_id"
+  add_index "sketches", ["gallery"], :name => "index_sketches_on_gallery"
+  add_index "sketches", ["reviewed"], :name => "index_sketches_on_reviewed"
   add_index "sketches", ["token"], :name => "index_sketches_on_token"
   add_index "sketches", ["updated_at"], :name => "index_sketches_on_updated_at"
 

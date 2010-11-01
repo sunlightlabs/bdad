@@ -7,6 +7,9 @@
     %table
       %thead
         %th Token
+        %th.reviewed Reviewed?
+        %th.appropriate Appropriate?
+        %th.gallery Gallery?
         %th Title
         %th Byline
         %th District
@@ -15,6 +18,9 @@
         - @sketches.each do |sketch|
           %tr
             %td.token= link_to(sketch.token, sketch_path(sketch))
+            %td.reviewed= boolean_markup(sketch.reviewed)
+            %td.appropriate= boolean_markup(sketch.appropriate)
+            %td.gallery= boolean_markup(sketch.gallery)
             %td= sketch.title
             %td= sketch.byline
             %td= sketch.district.combined_code
