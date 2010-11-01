@@ -1,5 +1,5 @@
 class SketchesController < ApplicationController
-  around_filter :set_gallery, :only => [:show, :edit, :new]
+  before_filter :set_gallery, :only => [:show, :edit, :new]
 
   def index
     @sketches = Sketch.recent
