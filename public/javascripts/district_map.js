@@ -309,7 +309,7 @@
       }
       return path;
     };
-    
+
     // Take one path string and split into an array of paths
     var splitPath = function(path) {
       var paths = [];

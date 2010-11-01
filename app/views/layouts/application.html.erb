@@ -5,9 +5,7 @@
     <!--[if lt IE 9]>
     <%= javascript_include_tag "html5shiv.js" %>
     <![endif]-->
-    <%= stylesheet_link_tag 'yui/reset',
-      'jquery.svg',
-      'application' %>
+    <%= stylesheet_link_tag 'yui/reset', 'jquery.svg', 'application' %>
     <%= csrf_meta_tag %>
   </head>
   <body>
@@ -33,4 +31,3 @@
     <%= content_for :javascript %>
   </body>
 </html>
-
