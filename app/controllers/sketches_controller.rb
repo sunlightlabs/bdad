@@ -40,7 +40,7 @@ class SketchesController < ApplicationController
   private
 
   def set_gallery
-    @gallery = Sketch.order("created_at DESC").limit(8)
+    @gallery = Sketch.gallery.random(8)
   end
 
   def random_district

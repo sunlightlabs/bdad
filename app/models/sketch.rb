@@ -17,12 +17,17 @@ class Sketch < ActiveRecord::Base
 
   # === Scopes
 
-  scope :recent, order("created_at DESC").limit(10)
+  scope :recent, order('created_at DESC').limit(10)
+  scope :gallery, where(:gallery => true)
 
   # == Class Methods ==
 
   def self.make_token
     SecureRandom.hex(8) # 2 characters * 8 = 16 characters
+  end
+
+  def self.random(count)
+    self.limit(count).order('random()') # random() is a Postgres function
   end
 
   # == Special Instance Methods ==
