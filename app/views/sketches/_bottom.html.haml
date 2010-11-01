@@ -9,9 +9,10 @@
 %section#gallery
   %h1 The Gallery
   - @gallery.each do |sketch|
-    .sketch
-      %form
-        = hidden_field_tag :sketch_token, sketch.token
-        = hidden_field_tag :combined_code, sketch.district.combined_code
-        = hidden_field_tag :sketch_paths, sketch.paths
+    %a{ :href => sketch_path(sketch) }
+      .sketch
+        %form
+          = hidden_field_tag :sketch_token, sketch.token
+          = hidden_field_tag :combined_code, sketch.district.combined_code
+          = hidden_field_tag :sketch_paths, sketch.paths
   .clear
