@@ -43,6 +43,20 @@ class Sketch < ActiveRecord::Base
 
   # == Instance Methods ==
 
+  def bounds
+    b = district.bounds
+    center    = Calculate.center(b)
+    range     = Calculate.range(b)
+    half_edge = [range[:x], range[:y]].max
+    edge      = half_edge * 2
+    {
+      :min_x   => center[:x] - half_edge,
+      :min_y   => center[:y] - half_edge,
+      :max_x   => center[:x] + half_edge,
+      :max_y   => center[:y] + half_edge,
+    }
+  end
+
   def ensure_token
     if token.blank?
       self.token = self.class.make_token

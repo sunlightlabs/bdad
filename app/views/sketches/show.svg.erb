@@ -1,0 +1,25 @@
+<?xml version="1.0" standalone="no"?>
+<?xml-stylesheet href="/stylesheets/application.css" type="text/css"?>
+<!DOCTYPE svg PUBLIC
+  "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="100%" 
+  height="100%"
+  viewBox="<%= view_box(@sketch.bounds) %>">
+  <title><%= @sketch.title %></title>
+  <desc><%= "By " + @sketch.byline%></desc>
+  <g class="states">
+    <path d="<%= States.paths %>" />
+  </g>
+  <g class="districts">
+    <path d="<%= Districts.paths %>" />
+  </g>
+  <g class="district">
+    <path d="<%= @sketch.district.paths %>" />
+  </g>
+  <g class="sketch">
+    <path d="<%= @sketch.paths %>" />
+  </g>
+</svg>

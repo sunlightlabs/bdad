@@ -34,11 +34,29 @@ class District < ActiveRecord::Base
 
   # == Instance Methods==
 
+  def bounds
+    districts = Bdad::Application.config.data[:districts]
+    district = districts['features'][combined_code]
+    b = district['bounds']
+    {
+      :min_x => b['minX'].to_f,
+      :min_y => b['minY'].to_f,
+      :max_x => b['maxX'].to_f,
+      :max_y => b['maxY'].to_f,
+    }
+  end
+
   def ensure_combined_code
     if combined_code.blank?
       self.combined_code = self.class.make_combined_code(
         state_code, district_code)
     end
+  end
+
+  def paths
+    districts = Bdad::Application.config.data[:districts]
+    district = districts['features'][combined_code]
+    district['paths']
   end
 
   def population

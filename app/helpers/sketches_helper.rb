@@ -1,5 +1,14 @@
 module SketchesHelper
 
+  def view_box(bounds)
+    [
+      bounds[:min_x],
+      bounds[:min_y],
+      bounds[:max_x] - bounds[:min_x],
+      bounds[:max_y] - bounds[:min_y],
+    ].join(' ')
+  end
+
   def fun_name
     NAMES.choice
   end
