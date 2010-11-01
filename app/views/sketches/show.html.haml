@@ -14,11 +14,4 @@
       %p#population_label Population
       %p#population_value= number_with_delimiter(@sketch.population)
   .clear
-  %section#about_the_app
-    %h1 About
-    %p
-      :markdown
-        Congressional districts sometimes have weird, even non-sensical shapes!
-        Here you can have some fun with them. Pick a district, tag it (graffiti
-        style), and give it a killer name. When you're done, save it to the
-        gallery.
+  = render :partial => 'bottom'

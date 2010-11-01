@@ -1,4 +1,5 @@
 class SketchesController < ApplicationController
+  around_filter :set_gallery, :only => [:show, :edit, :new]
 
   def index
     @sketches = Sketch.recent
@@ -16,7 +17,6 @@ class SketchesController < ApplicationController
 
   def new
     @sketch = Sketch.new(:district => random_district)
-    @gallery = get_gallery
   end
 
   def create
@@ -31,10 +31,10 @@ class SketchesController < ApplicationController
     redirect_to sketch_path(@sketch)
   end
 
-  def get_gallery
-    Sketch.order("created_at DESC").limit(4)
   private
 
+  def set_gallery
+    @gallery = Sketch.order("created_at DESC").limit(4)
   end
 
   def random_district

@@ -17,11 +17,4 @@
     %button#undo_last_path(type:button) Undo
     %button#clear_all_paths(type:button) Clear
   .clear
-  %section#about_the_app
-    %h1 About
-    %p
-      :markdown
-        Congressional districts sometimes have weird, even non-sensical shapes!
-        Here you can have some fun with them. Pick a district, tag it (graffiti
-        style), and give it a killer name. When you're done, save it to the
-        gallery.
+  = render :partial => 'bottom'

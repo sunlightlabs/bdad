@@ -18,14 +18,6 @@ $('document').ready(function() {
       clearAllPaths : $('button#clear_all_paths'),
     },
   });
-  var showWelcomeDialog = function() {
-    $("#welcome_dialog").dialog({
-      width: 420,
-      height: 115,
-      position: ['center', 105],
-    });
-  };
-  setTimeout(showWelcomeDialog, 2250);
   $('#gallery .sketch').each(function(index) {
     var $this = $(this);
     $this.districtMap({
