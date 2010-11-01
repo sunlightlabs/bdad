@@ -32,7 +32,7 @@ class UnsavedSketchesController < ApplicationController
     }
   end
 
-  protected
+  private
 
   def process_unsaved_sketch
     unsaved_sketch = UnsavedSketch.where(:token => params[:token]).first

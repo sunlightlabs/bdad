@@ -31,10 +31,10 @@ class SketchesController < ApplicationController
     redirect_to sketch_path(@sketch)
   end
 
-  protected
-  
   def get_gallery
     Sketch.order("created_at DESC").limit(4)
+  private
+
   end
 
   def random_district
