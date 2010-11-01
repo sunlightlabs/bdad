@@ -1,5 +1,6 @@
 class SketchesController < ApplicationController
   before_filter :set_gallery, :only => [:show, :edit, :new]
+  include SketchesHelper
 
   def index
     @sketches = Sketch.recent
@@ -16,7 +17,12 @@ class SketchesController < ApplicationController
   end
 
   def new
-    @sketch = Sketch.new(:district => random_district)
+    district = random_district
+    @sketch = Sketch.new({
+      :district => district,
+      :title    => fun_title(district),
+      :byline   => "Your Name Here",
+    })
   end
 
   def create
@@ -34,7 +40,7 @@ class SketchesController < ApplicationController
   private
 
   def set_gallery
-    @gallery = Sketch.order("created_at DESC").limit(4)
+    @gallery = Sketch.order("created_at DESC").limit(8)
   end
 
   def random_district
@@ -45,19 +51,21 @@ class SketchesController < ApplicationController
   end
 
   def create_sketch
-    Sketch.create!({
+    sketch = Sketch.new({
       :title    => params[:sketch][:title],
       :byline   => params[:sketch][:byline],
       :district => get_district,
       :token    => params[:sketch_token],
-      :paths    => get_unsaved_sketch.paths,
     })
+    add_paths(sketch)
+    sketch.save!
+    sketch
   end
   
   def update_sketch(sketch)
     sketch.title  = params[:sketch][:title]
     sketch.byline = params[:sketch][:byline]
-    sketch.paths  = get_unsaved_sketch.paths
+    add_paths(sketch)
     sketch.save!
   end
 
@@ -68,11 +76,13 @@ class SketchesController < ApplicationController
     district
   end
 
+  def add_paths(sketch)
+    unsaved_sketch = get_unsaved_sketch
+    sketch.paths = unsaved_sketch.paths if unsaved_sketch
+  end
+
   def get_unsaved_sketch
-    token = params[:sketch_token]
-    unsaved_sketch = UnsavedSketch.where(:token => token).first
-    raise "No UnsavedSketch with token #{token}" unless unsaved_sketch
-    unsaved_sketch
+    UnsavedSketch.where(:token => params[:sketch_token]).first
   end
 
 end

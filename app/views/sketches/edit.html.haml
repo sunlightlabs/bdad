@@ -7,8 +7,8 @@
     = form_for @sketch do |f|
       = hidden_field_tag :sketch_token, @sketch.token
       = hidden_field_tag :combined_code, @sketch.district.combined_code
-      = f.text_field :title, :placeholder => fun_title(@sketch.district)
-      = f.text_field :byline, :placeholder => fun_name
+      = f.text_field :title, :placeholder => "District Name Goes Here"
+      = f.text_field :byline, :placeholder => "Your Name"
       = hidden_field_tag :sketch_paths, @sketch.paths
       %button#save_drawing(type:submit) Update
     #population_estimate
