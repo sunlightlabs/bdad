@@ -16,15 +16,13 @@
     .clear
   %section#about_the_app
     %h1 About
-    %p
-      :markdown
-        Congressional districts sometimes have weird, even non-sensical
-        shapes! Why not have some fun with them?
+    :markdown
+      Congressional districts sometimes have weird, even non-sensical
+      shapes! Why not have some fun with them?
     %p
       Share this drawing by using this link:
       %br
       = link_to(sketch_url(@sketch), sketch_path(@sketch))
-    %p
-      :markdown
-        Want to [create a new drawing](#{new_sketch_path})?
+    :markdown
+      Want to [create a new drawing](#{new_sketch_path})?
   = render :partial => 'gallery'
