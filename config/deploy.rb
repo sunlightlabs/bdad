@@ -1,5 +1,5 @@
 set :application, 'bdad'
-set :repository,  'git@github.com:djsun/bdad.git'
+set :repository,  'git@github.com:sunlightlabs/bdad.git'
 set :scm,         :git
 set :user,        'bdad'
 set :use_sudo,    false
