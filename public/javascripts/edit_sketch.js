@@ -20,18 +20,4 @@ $('document').ready(function() {
       clearAllPaths : $('button#clear_all_paths'),
     },
   });
-  $('#gallery .sketch').each(function(index) {
-    var $this = $(this);
-    $this.districtMap({
-      enableSketching   : false,
-      enableZoom        : false,
-      states            : STATES,
-      districts         : DISTRICTS,
-      fields : {
-        sketchToken  : $this.find('#sketch_token'),
-        combinedCode : $this.find('#combined_code'),
-        sketchPaths  : $this.find('#sketch_paths'),
-      },
-    });
-  });
 });
