@@ -185,25 +185,39 @@ div#show_sketch_page
   background-color: #FFFFFF
   border: 2px solid #D4B64B
   color: #000000
-  display: block
   position: absolute
   text-align: center
 
-div#new_sketch_page, div#show_sketch_page, div#edit_sketch_page
+@mixin sketch_title
+  @include sketch_input_control
+  font-size: 24px
+  height: 27px
+  left: ($frame_width / 2) - 250px
+  top: 15px
+  width: 500px
+
+@mixin sketch_byline
+  @include sketch_input_control
+  @include sketch_input_control
+  font-size: 16px
+  height: 36px
+  right: 68px
+  top: 600px
+  width: 200px
+
+div#new_sketch_page, div#edit_sketch_page
   #sketch_title
-    @include sketch_input_control
-    font-size: 24px
-    height: 27px
-    left: ($frame_width / 2) - 250px
-    top: 15px
-    width: 500px
+    @include sketch_title
   #sketch_byline
-    @include sketch_input_control
-    font-size: 16px
-    height: 36px
-    right: 68px
-    top: 600px
-    width: 200px
+    @include sketch_byline
+
+div#show_sketch_page
+  #sketch_title
+    @include sketch_title
+  #sketch_byline
+    @include sketch_byline
+    padding-top: 8px
+    height: 36px - 8px
 
 #about_the_app
   margin: 20px auto 0
