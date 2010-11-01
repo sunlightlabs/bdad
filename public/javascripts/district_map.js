@@ -25,35 +25,6 @@
         clearAllPaths   : null, // jQuery selector to clear button
       },
       spinnerImageTag   : "<img src='/images/spinner.gif'/>",
-      styles : {
-        sketch : {
-          fill          : '#FFCCCC',
-          fillOpacity   : 0.75,
-          opacity       : 0.75,
-          stroke        : '#606060',
-          strokeWidth   : 0.5,
-        },
-        district : {
-          fill          : '#CCCCFF',
-          fillOpacity   : 0.75,
-          opacity       : 0.75,
-          stroke        : '#606060',
-          strokeWidth   : 0.5,
-        },
-        districts : {
-          fillOpacity   : 0,
-          opacity       : 0.3,
-          stroke        : '#A0A0A0',
-          strokeWidth   : 0.5,
-        },
-        states : {
-          fill          : '#408040',
-          fillOpacity   : 1,
-          opacity       : 0.3,
-          stroke        : '#C0C0C0',
-          strokeWidth   : 1,
-        }
-      },
     };
 
     var settings = $.extend(true, {}, defaults, options);
@@ -93,7 +64,7 @@
       drawStates(svg, topGroup);
       drawDistricts(svg, topGroup);
       drawDistrict(svg, topGroup);
-      var sketchGroup = svg.group(topGroup, settings.styles.sketch);
+      var sketchGroup = svg.group(topGroup, { class : 'sketch' });
       if($sketchPaths) {
         drawExistingSketch(svg, sketchGroup);
       }
@@ -115,19 +86,19 @@
     };
 
     var drawStates = function(svg, parentGroup) {
-      var group = svg.group(parentGroup, settings.styles.states);
+      var group = svg.group(parentGroup, { class : 'states' });
       var path = reducePaths(states);
       svg.path(group, path);
     };
 
     var drawDistricts = function(svg, parentGroup) {
-      var group = svg.group(parentGroup, settings.styles.districts);
+      var group = svg.group(parentGroup, { class : 'districts' });
       var path = reducePaths(districts);
       svg.path(group, path);
     };
 
     var drawDistrict = function(svg, parentGroup) {
-      var group = svg.group(parentGroup, settings.styles.district);
+      var group = svg.group(parentGroup, { class : 'district' });
       var path = reduceArray(district.paths);
       svg.path(group, path);
     };
