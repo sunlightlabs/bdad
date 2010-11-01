@@ -32,6 +32,8 @@ a:visited, a:hover, a:active
 
 // === shared ===
 
+p + p
+  margin-bottom: 12px
 .clear
   clear: both
 strong
@@ -245,7 +247,7 @@ div#show_sketch_page
 
 #about_the_app
   margin: 20px auto 0
-  width: 400px
+  width: $page_width / 2
   h1
     @include section_header
   p

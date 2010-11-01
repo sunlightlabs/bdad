@@ -16,5 +16,15 @@
       %p#population_value 0
     %button#undo_last_path(type:button) Undo
     %button#clear_all_paths(type:button) Clear
-  .clear
-  = render :partial => 'bottom'
+    .clear
+  %section#about_the_app
+    %h1 About
+    %p
+      :markdown
+        Congressional districts sometimes have weird, even non-sensical
+        shapes! Why not have some fun with them?
+
+        You are currently editing a drawing.
+
+        Want to [create a new drawing](#{new_sketch_path})?
+  = render :partial => 'gallery'

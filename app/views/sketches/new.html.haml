@@ -15,5 +15,14 @@
       %p#population_value 0
     %button#undo_last_path(type:button) Undo
     %button#clear_all_paths(type:button) Clear
-  .clear
-  = render :partial => 'bottom'
+    .clear
+  %section#about_the_app
+    %h1 About
+    %p
+      :markdown
+        Congressional districts sometimes have weird, even non-sensical
+        shapes! Here you can have some fun with them.
+
+        We've given you a random district. Tag it, name it, save it, and share
+        it.
+  = render :partial => 'gallery'
