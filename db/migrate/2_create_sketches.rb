@@ -4,8 +4,8 @@ class CreateSketches < ActiveRecord::Migration
       t.string        :title
       t.string        :byline
       t.integer       :district_id
-      t.string        :token,       :limit => 16
-      t.text          :paths
+      t.string        :token,       :limit   => 16
+      t.text          :paths,       :default => ''
       t.multi_polygon :geometry
       t.timestamps
     end

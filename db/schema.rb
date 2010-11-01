@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(:version => 3) do
     t.string        "byline"
     t.integer       "district_id"
     t.string        "token",       :limit => 16
-    t.text          "paths"
+    t.text          "paths",                      :default => ""
     t.datetime      "created_at"
     t.datetime      "updated_at"
     t.multi_polygon "geometry",    :limit => nil
@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(:version => 3) do
 
   create_table "unsaved_sketches", :force => true do |t|
     t.integer       "district_id"
-    t.text          "paths"
+    t.text          "paths",                      :default => ""
     t.string        "token"
     t.datetime      "created_at"
     t.datetime      "updated_at"
