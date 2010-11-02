@@ -4,7 +4,7 @@
     .sketch
       .container
         %a{:href => sketch_path(sketch)}
-        %object{:data => sketch_path(sketch, :format => :svg), :type => 'image/svg+xml', :data_url => sketch_path(sketch)}
+        = image_tag('spinner.gif', :class => :loading, 'data-url' => sketch_path(sketch, :format => :svg))
         .more
           .title= sketch.title
           .byline= sketch.byline
