@@ -1,7 +1,8 @@
 class SketchesController < ApplicationController
+  include SketchesHelper
+
   before_filter :set_gallery, :only => [:show, :edit, :new]
   respond_to :html, :svg, :only => [:show]
-  include SketchesHelper
 
   def index
     @sketches = Sketch.recent
