@@ -10,7 +10,7 @@ set :branch,      'production'
 
 role :web, domain
 role :app, domain
-role :db,  domain
+role :db,  domain, :primary => true
 
 # Passenger
 namespace :deploy do
