@@ -9,7 +9,8 @@
       states            : null, // state data
       districts         : null, // district data
       initialViewBox    : null, // '-20 -20 780 440'
-      zoomDuration      : 5000, // in milliseconds
+      preZoomDelay      : 1000,  // milliseconds
+      zoomDuration      : 5000, // milliseconds
       fields : {
         sketchToken     : null, // jQuery selector to a hidden field
         combinedCode    : null, // jQuery selector to a hidden field
@@ -69,7 +70,9 @@
         drawExistingSketch(svg, sketchGroup);
       }
       if(settings.enableZoom) {
-        zoomToDistrict(svg);
+        setTimeout(function() {
+          zoomToDistrict(svg)
+        }, settings.preZoomDelay);
       }
       if(settings.enableSketching) {
         enableSketchPad(svg, sketchGroup);
@@ -172,7 +175,7 @@
         intervalID = setInterval(step, settings.replayInterval);
       };
       if(ni > 0) {
-        setTimeout(start, settings.zoomDuration);
+        setTimeout(start, settings.preZoomDelay + settings.zoomDuration);
       }
     };
 
