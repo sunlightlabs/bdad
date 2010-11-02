@@ -271,19 +271,30 @@ $gallery_item_margin: $gallery_item_gutter - $gallery_item_border
   .sketch
     float: left
     margin: $gallery_item_margin
-    object
-      border: $gallery_item_border solid #A0A0A0
-      height: $gallery_item_inside_height
+    .container
+      position: relative
       width: $gallery_item_inside_width
-    .more
-      height: 47px
-      width: $gallery_item_inside_width + $gallery_item_border
-      text-align: center
-      .title
-        font-size: 85%
-        font-weight: bold
-      .byline
-        font-size: 75%
+      height: $gallery_item_inside_height + 5px + 47px
+      a, object
+        border: $gallery_item_border solid #A0A0A0
+        height: $gallery_item_inside_height
+        position: absolute
+        width: $gallery_item_inside_width
+      a
+        display: block
+      object
+        z-index: 1
+      .more
+        top: $gallery_item_inside_height + 5px
+        height: 47px
+        position: absolute
+        text-align: center
+        width: $gallery_item_inside_width + $gallery_item_border
+        .title
+          font-size: 85%
+          font-weight: bold
+        .byline
+          font-size: 75%
 
 // === other stuff / other pages ===
 

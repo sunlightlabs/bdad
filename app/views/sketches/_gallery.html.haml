@@ -2,8 +2,10 @@
   %h1 The Gallery
   - @gallery.each do |sketch|
     .sketch
-      %object{:data => sketch_path(sketch, :format => :svg), :type => 'image/svg+xml', :data_url => sketch_path(sketch)}
-      .more
-        .title= sketch.title
-        .byline= sketch.byline
+      .container
+        %a{:href => sketch_path(sketch)}
+        %object{:data => sketch_path(sketch, :format => :svg), :type => 'image/svg+xml', :data_url => sketch_path(sketch)}
+        .more
+          .title= sketch.title
+          .byline= sketch.byline
   .clear
