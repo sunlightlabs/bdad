@@ -262,7 +262,7 @@ $gallery_item_gutter: 10px
 $gallery_item_border: 1px
 $gallery_item_inside_width: $gallery_item_total_width - 2 * $gallery_item_gutter
 $gallery_item_inside_height: round($gallery_item_inside_width / $gallery_aspect_ratio)
-
+$gallery_item_margin: $gallery_item_gutter - $gallery_item_border
 #gallery
   margin: 20px auto 0
   width: $gallery_item_total_width * $gallery_items
@@ -270,11 +270,20 @@ $gallery_item_inside_height: round($gallery_item_inside_width / $gallery_aspect_
     @include section_header
   .sketch
     float: left
-    background-color: #EEEEEE
-    border: $gallery_item_border solid #A0A0A0
-    margin: $gallery_item_gutter - $gallery_item_border
-    height: $gallery_item_inside_height
-    width: $gallery_item_inside_width
+    margin: $gallery_item_margin
+    object
+      border: $gallery_item_border solid #A0A0A0
+      height: $gallery_item_inside_height
+      width: $gallery_item_inside_width
+    .more
+      height: 47px
+      width: $gallery_item_inside_width + $gallery_item_border
+      text-align: center
+      .title
+        font-size: 85%
+        font-weight: bold
+      .byline
+        font-size: 75%
 
 // === other stuff / other pages ===
 

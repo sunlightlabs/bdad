@@ -1,10 +1,9 @@
 %section#gallery
   %h1 The Gallery
   - @gallery.each do |sketch|
-    %a{ :href => sketch_path(sketch) }
-      .sketch
-        %form
-          = hidden_field_tag :sketch_token, sketch.token
-          = hidden_field_tag :combined_code, sketch.district.combined_code
-          = hidden_field_tag :sketch_paths, sketch.paths
+    .sketch
+      %object{:data => sketch_path(sketch, :format => :svg), :type => 'image/svg+xml', :data_url => sketch_path(sketch)}
+      .more
+        .title= sketch.title
+        .byline= sketch.byline
   .clear
