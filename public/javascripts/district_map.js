@@ -133,53 +133,59 @@
     };
 
     var replayPaths = function(svg, parentGroup, pathStrings) {
-      // Setup indexes...
-      var indexes = [];
-      for(var i = 0, ni = pathStrings.length; i < ni; ++i) {
-        var pathString = pathStrings[i];
-        indexes[i] = [];
-        for(var j = 0, nj = pathString.length; j < nj; ++j) {
-          if(j > 0 && pathString[j] == 'L') {
-            indexes[i].push(j);
+      var setupIndexes = function() {
+        var indexes = [];
+        for(var i = 0, ni = pathStrings.length; i < ni; ++i) {
+          var pathString = pathStrings[i];
+          indexes[i] = [];
+          for(var j = 0, nj = pathString.length; j < nj; ++j) {
+            if(j > 0 && pathString[j] == 'L') {
+              indexes[i].push(j);
+            }
           }
         }
-      }
-      // Loop over indexes...
-      var intervalID;
-      var currentPath;
-      var path;
-      var i = 0;
-      var j = 0;
-      var ni = indexes.length;
-      var erase = true;
-      var step = function() {
-        var nj = indexes[i].length;
-        if(currentPath && j > 0) {
-          svg.remove(currentPath);
-        }
-        path = pathStrings[i].substring(0, indexes[i][j]);
-        if(j == nj - 1) {
-          path += 'Z';
-        }
-        currentPath = svg.path(parentGroup, path);
-        if(j == nj - 1) {
-          svgPaths.push(currentPath);
-        }
-        ++j;
-        if(j == nj) {
-          ++i;
-          j = 0;
-          if(i == ni) {
-            clearInterval(intervalID);
+        return indexes;
+      };
+      var indexes = setupIndexes();
+
+      var loopOverIndexes = function(indexes) {
+        var intervalID;
+        var currentPath;
+        var path;
+        var i = 0;
+        var j = 0;
+        var ni = indexes.length;
+        var erase = true;
+        var step = function() {
+          var nj = indexes[i].length;
+          if(currentPath && j > 0) {
+            svg.remove(currentPath);
           }
+          path = pathStrings[i].substring(0, indexes[i][j]);
+          if(j == nj - 1) {
+            path += 'Z';
+          }
+          currentPath = svg.path(parentGroup, path);
+          if(j == nj - 1) {
+            svgPaths.push(currentPath);
+          }
+          ++j;
+          if(j == nj) {
+            ++i;
+            j = 0;
+            if(i == ni) {
+              clearInterval(intervalID);
+            }
+          }
+        };
+        var start = function() {
+          intervalID = setInterval(step, settings.replayInterval);
+        };
+        if(ni > 0) {
+          setTimeout(start, settings.preZoomDelay + settings.zoomDuration);
         }
       };
-      var start = function() {
-        intervalID = setInterval(step, settings.replayInterval);
-      };
-      if(ni > 0) {
-        setTimeout(start, settings.preZoomDelay + settings.zoomDuration);
-      }
+      loopOverIndexes(indexes);
     };
 
     var enableSketchPad = function(svg, parentGroup) {
