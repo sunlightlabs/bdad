@@ -3,5 +3,5 @@ db/*.sqlite3
 log/*.log
 tmp/**/*
 public/stylesheets/*.css
-public/javascripts/all.js
+public/javascripts/bundles/*
 config/*.yml

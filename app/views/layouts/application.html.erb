@@ -25,9 +25,11 @@
       'lib/jquery.hotkeys.js',
       'district_map.js',
       'application.js',
+      :cache => 'bundles/code') %>
+    <%= javascript_include_tag(
       'data/states.js',
       'data/districts.js',
-      :cache => true) %>
+      :cache => 'bundles/data') %>
     <%= content_for :javascript %>
   </body>
 </html>
