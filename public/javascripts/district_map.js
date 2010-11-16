@@ -15,7 +15,7 @@
         sketchToken     : null, // jQuery selector to a hidden field
         combinedCode    : null, // jQuery selector to a hidden field
         sketchPaths     : null, // jQuery selector to a hidden field
-        population      : null, // jQuery selector to an element
+        population      : null  // jQuery selector to an element
       },
       replaySketch      : null, // Replay sketch (if sketchPaths present)
       replayInterval    : 5,    // Replay delay (if replayDelay is true)
@@ -23,9 +23,9 @@
       authenticityToken : null, // Cross Site Request Forgery Token
       controls : {
         undoLastPath    : null, // jQuery selector to undo button
-        clearAllPaths   : null, // jQuery selector to clear button
+        clearAllPaths   : null  // jQuery selector to clear button
       },
-      spinnerImageTag   : "<img src='/images/spinner.gif'/>",
+      spinnerImageTag   : "<img src='/images/spinner.gif'/>"
     };
 
     var settings = $.extend(true, {}, defaults, options);
@@ -68,13 +68,13 @@
       drawStates(svg, topGroup);
       drawDistricts(svg, topGroup);
       drawDistrict(svg, topGroup);
-      var sketchGroup = svg.group(topGroup, { class : 'sketch' });
+      var sketchGroup = svg.group(topGroup, { 'class' : 'sketch' });
       if($sketchPaths) {
         drawExistingSketch(svg, sketchGroup);
       }
       if(settings.enableZoom) {
         setTimeout(function() {
-          zoomToDistrict(svg)
+          zoomToDistrict(svg);
         }, settings.preZoomDelay);
       }
       if(settings.enableSketching) {
@@ -92,19 +92,19 @@
     };
 
     var drawStates = function(svg, parentGroup) {
-      var group = svg.group(parentGroup, { class : 'states' });
+      var group = svg.group(parentGroup, { 'class' : 'states' });
       var path = reducePaths(states);
       svg.path(group, path);
     };
 
     var drawDistricts = function(svg, parentGroup) {
-      var group = svg.group(parentGroup, { class : 'districts' });
+      var group = svg.group(parentGroup, { 'class' : 'districts' });
       var path = reducePaths(districts);
       svg.path(group, path);
     };
 
     var drawDistrict = function(svg, parentGroup) {
-      var group = svg.group(parentGroup, { class : 'district' });
+      var group = svg.group(parentGroup, { 'class' : 'district' });
       var path = reduceArray(district.paths);
       svg.path(group, path);
     };
@@ -266,7 +266,7 @@
           'combined_code'      : combinedCode,
           'paths'              : getCombinedSVGPaths(),
           'token'              : sketchToken,
-          'authenticity_token' : settings.authenticityToken,
+          'authenticity_token' : settings.authenticityToken
         };
         $.post(saveURL, data, function(data) {
           updatePopulation(data.population);
@@ -309,7 +309,7 @@
 
     // Concatenates all paths from an object
     var reducePaths = function(items) {
-      var path = ''
+      var path = '';
       for(var key in items) {
         path += reduceArray(items[key].paths);
       }
@@ -333,14 +333,14 @@
     var calculateRange = function(bounds) {
       return {
         x : bounds.maxX - bounds.minX,
-        y : bounds.maxY - bounds.minY,
+        y : bounds.maxY - bounds.minY
       };
     };
 
     var calculateCenter = function(bounds) {
       return {
         x : (bounds.maxX + bounds.minX) / 2.0,
-        y : (bounds.maxY + bounds.minY) / 2.0,
+        y : (bounds.maxY + bounds.minY) / 2.0
       };
     };
 
@@ -349,12 +349,7 @@
       var center   = calculateCenter(bounds);
       var halfEdge = Math.max(range.x, range.y);
       var edge     = halfEdge * 2.0;
-      return [
-        center.x - halfEdge,
-        center.y - halfEdge,
-        edge,
-        edge,
-      ].join(' ');
+      return [center.x - halfEdge, center.y - halfEdge, edge, edge].join(' ');
     };
 
     // ===== The Main Function =====
