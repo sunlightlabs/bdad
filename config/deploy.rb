@@ -12,14 +12,19 @@ role :web, domain
 role :app, domain
 role :db,  domain, :primary => true
 
-# Passenger
 require 'bundler/deployment'
 
 namespace :deploy do
-  task :start do ; end
-  task :stop do ; end
+  task :start do
+    # ...
+  end
+
+  task :stop do
+    # ...
+  end
+
   task :restart, :roles => :app, :except => { :no_release => true } do
-    run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+    # ...
   end
 
   task :symlink_config do
