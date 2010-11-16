@@ -13,6 +13,8 @@ role :app, domain
 role :db,  domain, :primary => true
 
 # Passenger
+require 'bundler/deployment'
+
 namespace :deploy do
   task :start do ; end
   task :stop do ; end
