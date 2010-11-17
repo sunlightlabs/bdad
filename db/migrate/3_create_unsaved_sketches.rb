@@ -1,10 +1,10 @@
 class CreateUnsavedSketches < ActiveRecord::Migration
   def self.up
     create_table :unsaved_sketches do |t|
-      t.integer       :district_id
-      t.text          :paths,       :default => ''
-      t.string        :token
-      t.multi_polygon :geometry
+      t.integer  :district_id
+      t.text     :paths,       :default => ''
+      t.string   :token
+      t.geometry :geometry
       t.timestamps
     end
     add_index :unsaved_sketches, :district_id

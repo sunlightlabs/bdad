@@ -17,7 +17,7 @@ class Convert
   # Notes:
   #   * This does not detect errors in a pathstring.
   #   * It would be better to split on 'M' first.
-  def self.svg_path_to_multi_polygon_coordinates(path, &block)
+  def self.svg_path_to_list_of_polygon_coordinates(path, &block)
     p = path.split(/[Zz]/)
     # ["M2 3L4 5L6 7", "M5 0L4 3L3 2"] 
     

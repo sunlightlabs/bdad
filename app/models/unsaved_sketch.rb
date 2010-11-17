@@ -12,7 +12,7 @@ class UnsavedSketch < ActiveRecord::Base
 
   # == Callbacks ==
 
-  before_save :set_geometry
+  after_save :set_geometry
 
   # === Scopes
 
@@ -29,19 +29,16 @@ class UnsavedSketch < ActiveRecord::Base
 
   # == Instance Methods ==
 
-  def get_geometry
-    coordinates = Convert.svg_path_to_multi_polygon_coordinates(paths) do |p|
-      Convert.screen_point_to_gis_point(p)
-    end
-    MultiPolygon.from_coordinates(coordinates)
+  def polygons
+    DatabaseHelper.polygons_from_paths(paths)
   end
 
   def population
-    QueryHelper.population('unsaved_sketches', id) if id
+    DatabaseHelper.query_population('unsaved_sketches', id) if id
   end
 
   def set_geometry
-    self.geometry = get_geometry
+    DatabaseHelper.update_geometry('unsaved_sketches', id, polygons)
   end
 
 end
