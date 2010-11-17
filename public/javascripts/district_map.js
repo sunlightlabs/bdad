@@ -56,9 +56,6 @@
     var baseURL   = window.location.protocol + '//' + window.location.host;
     var saveURL   = baseURL + '/' + settings.savePath;
     var svgPaths  = [];
-    var offset    = $this.offset();
-    var offsetX   = offset.left;
-    var offsetY   = offset.top;
 
     // ===== High Level Drawing Functions =====
 
@@ -252,8 +249,9 @@
       // Return the mouse location in SVG coordinates
       var getMousePoint = function(e) {
         var matrix = parentGroup.getCTM().inverse();
-        point.x = e.pageX - offsetX;
-        point.y = e.pageY - offsetY;
+        var offset = $this.offset();
+        point.x = e.pageX - offset.left;
+        point.y = e.pageY - offset.top;
         var p = point.matrixTransform(matrix);
         return { x : p.x, y : p.y };
       };
