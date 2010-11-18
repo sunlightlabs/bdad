@@ -17,7 +17,7 @@ namespace :backup do
 
   desc "Backup sketches"
   task :sketches => :environment do
-    filename = Rails.root.join('backups', 'paths.yml')
+    filename = Rails.root.join('backups', 'sketches.yml')
     File.open(filename, 'w') do |f|
       output = Sketch.all.map do |sketch|
         hash = {}

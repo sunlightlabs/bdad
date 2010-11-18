@@ -2,7 +2,7 @@ namespace :restore do
 
   desc "Restore sketches"
   task :sketches => :environment do
-    filename = Rails.root.join('backups', 'paths.yml')
+    filename = Rails.root.join('backups', 'sketches.yml')
     rows = YAML::load_file(filename)
     count = 0
     rows.each do |row|
