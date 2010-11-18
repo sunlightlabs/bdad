@@ -1,3 +1,5 @@
-unicorn_rails -l unix:/Users/david/dev/bdad/tmp/sockets/bdad.sock -E production
 # useful options:
 # -D
+
+unicorn_rails -l unix:tmp/sockets/socket.sock -E development
+# unicorn_rails -l unix:tmp/sockets/socket.sock -E production
