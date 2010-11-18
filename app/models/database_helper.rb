@@ -29,7 +29,6 @@ class DatabaseHelper
         }.join(", ") +
       "])" +
     ") WHERE id = #{record_id};"
-    puts command
     ActiveRecord::Base.connection.execute(command)
   end
 
