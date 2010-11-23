@@ -1,0 +1,1 @@
+rake db:drop_all db:reset_migrations db:migrate restore:districts restore:sketches --trace
