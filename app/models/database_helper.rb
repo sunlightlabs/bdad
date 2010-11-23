@@ -20,6 +20,15 @@ class DatabaseHelper
   end
 
   # polygons : a Ruby array of GeoRuby Polygon objects
+  #
+  # SELECT
+  #   ST_Union(
+  #     ARRAY[
+  #       ST_buffer(ST_GeomFromText('POLYGON((x y,...))'), 0),
+  #       ST_buffer(ST_GeomFromText('POLYGON((x y,...))'), 0),
+  #       ST_buffer(ST_GeomFromText('POLYGON((x y,...))'), 0)
+  #     ]
+  #   );
   def self.update_geometry(table, record_id, polygons)
     command = "UPDATE #{table} " +
     "SET geometry = (" +
@@ -32,13 +41,5 @@ class DatabaseHelper
     ActiveRecord::Base.connection.execute(command)
   end
 
-  # SELECT
-  #   ST_Union(
-  #     ARRAY[
-  #       ST_buffer(ST_GeomFromText('POLYGON((x y,...))'), 0),
-  #       ST_buffer(ST_GeomFromText('POLYGON((x y,...))'), 0),
-  #       ST_buffer(ST_GeomFromText('POLYGON((x y,...))'), 0)
-  #     ]
-  #   );
 
 end
