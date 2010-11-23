@@ -29,17 +29,18 @@ class DatabaseHelper
   #       ST_buffer(ST_GeomFromText('POLYGON((x y,...))'), 0)
   #     ]
   #   );
-  def self.update_geometry(table, record_id, polygons)
-    command = "UPDATE #{table} " +
-    "SET geometry = (" +
-      "SELECT ST_Union(ARRAY[" +
+  def self.update_geometry(table, id, polygons)
+    inner = if polygons.empty?
+      "(SELECT ST_MakePolygon(null))"
+    else
+      "(SELECT ST_Union(ARRAY[" +
         polygons.map { |polygon|
           "ST_Buffer(ST_GeomFromText('#{polygon.as_wkt}'), 0)"
         }.join(", ") +
-      "])" +
-    ") WHERE id = #{record_id};"
+      "]))"
+    end
+    command = "UPDATE #{table} SET geometry = #{inner} WHERE id = #{id};"
     ActiveRecord::Base.connection.execute(command)
   end
-
 
 end
