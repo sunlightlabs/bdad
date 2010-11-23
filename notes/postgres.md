@@ -12,3 +12,11 @@ Show columns in a table:
 
     \d bgs;
 
+Dump all data from a database:
+
+    pg_dump -h smokehouse -U bdad -a bdad_dev > bdad.sql
+
+Dump data from a table from a database:
+
+    pg_dump -h smokehouse -U bdad -t districts -a bdad_dev > bdad_districts.sql
+    -a, --data-only             dump only the data, not the schema
