@@ -1,1 +1,4 @@
+# Well, not quite everything.
+# When a database is first setup, `rake restore:block_groups` needs to be run.
+# It creates the 'bg' table. The other commands will not affect it.
 rake db:drop_all db:reset_migrations db:migrate restore:districts restore:sketches --trace

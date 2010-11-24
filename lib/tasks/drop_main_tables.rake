@@ -1,7 +1,7 @@
 namespace :db do
 
-  desc "Drop all tables"
-  task :drop_all => :environment do
+  desc "Drop districts, sketches, unsaved_sketches"
+  task :drop_main_tables => :environment do
     verbosely_drop_table('districts')
     verbosely_drop_table('sketches')
     verbosely_drop_table('unsaved_sketches')

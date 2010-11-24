@@ -1,6 +1,6 @@
 namespace :db do
 
-  desc "Dangerous! Drops schema_migrations table"
+  desc "Dangerously drops the schema_migrations table"
   task :reset_migrations => :environment do
     verbosely_drop_table('schema_migrations')
   end
