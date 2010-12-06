@@ -32,5 +32,8 @@
       :cache => 'bundles/data') %>
     <%= content_for :javascript %>
     <%= render :partial => 'layouts/analytics' %>
+    <% if Rails.env == 'production' -%>
+      <script src="http://services.sunlightlabs.com/brandingbar/hat_js/bdad/" type="text/javascript"></script>
+    <% end -%>
   </body>
 </html>
