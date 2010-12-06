@@ -1,10 +1,12 @@
 class SketchesController < ApplicationController
+  include ApplicationHelper
   include SketchesHelper
 
   before_filter :set_gallery, :only => [:show, :edit, :new]
   respond_to :html, :svg, :only => [:show]
 
   def index
+    render_401 && return unless authorized?
     @sketches = Sketch.recent
   end
 
@@ -16,6 +18,7 @@ class SketchesController < ApplicationController
   def edit
     @sketch = Sketch.where(:token => params[:id]).first
     render_404 && return unless @sketch
+    redirect_to(sketch_path(@sketch)) unless authorized? || @sketch.editable
   end
 
   def new
@@ -63,7 +66,7 @@ class SketchesController < ApplicationController
     sketch.save!
     sketch
   end
-  
+
   def update_sketch(sketch)
     sketch.title  = params[:sketch][:title]
     sketch.byline = params[:sketch][:byline]

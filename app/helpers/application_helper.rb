@@ -11,4 +11,12 @@ module ApplicationHelper
     content_tag(:span, entity.html_safe, :class => css_class)
   end
 
+  def authorized?
+    user, pass = params[:u], params[:p]
+    return unless user.present? && pass.present?
+    admin = Bdad::Application.config.admin_credentials
+    admin_user, admin_pass = admin['u'], admin['p']
+    user == admin_user && pass == admin_pass
+  end
+
 end

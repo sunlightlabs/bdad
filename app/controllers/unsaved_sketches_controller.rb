@@ -1,6 +1,8 @@
 class UnsavedSketchesController < ApplicationController
+  include ApplicationHelper
 
   def index
+    render_401 && return unless authorized?
     @unsaved_sketches = UnsavedSketch.recent
   end
   

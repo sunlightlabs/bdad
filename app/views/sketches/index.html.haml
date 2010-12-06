@@ -7,6 +7,7 @@
     %table
       %thead
         %th Token
+        %th.editable Editable?
         %th.reviewed Reviewed?
         %th.appropriate Appropriate?
         %th.gallery Gallery?
@@ -18,6 +19,7 @@
         - @sketches.each do |sketch|
           %tr
             %td.token= link_to(sketch.token, sketch_path(sketch))
+            %td.editable= boolean_markup(sketch.editable)
             %td.reviewed= boolean_markup(sketch.reviewed)
             %td.appropriate= boolean_markup(sketch.appropriate)
             %td.gallery= boolean_markup(sketch.gallery)

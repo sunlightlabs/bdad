@@ -10,36 +10,36 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 3) do
+ActiveRecord::Schema.define(:version => 4) do
 
   create_table "awards", :id => false, :force => true do |t|
-    t.string   "name",      :limit => nil
-    t.integer  "id"
-    t.geometry "the_point", :limit => nil
+    t.string  "name",      :limit => nil
+    t.integer "id"
+    t.point   "the_point", :limit => nil
   end
 
   add_index "awards", ["id"], :name => "awards_id_key", :unique => true
 
   create_table "bgs", :primary_key => "gid", :force => true do |t|
-    t.integer  "__gid",      :limit => 8
-    t.decimal  "area"
-    t.decimal  "perimeter"
-    t.string   "bg01_d00_",  :limit => 21
-    t.string   "bg01_d00_i", :limit => 21
-    t.string   "state"
-    t.string   "county"
-    t.string   "tract"
-    t.string   "blkgroup"
-    t.string   "name"
-    t.string   "lsad"
-    t.string   "lsad_trans"
-    t.string   "the_geom"
-    t.geometry "the_point",  :limit => nil
-    t.integer  "pop"
-    t.integer  "state_i"
-    t.integer  "county_i"
-    t.integer  "tract_i"
-    t.integer  "blkgroup_i"
+    t.integer "__gid",      :limit => 8
+    t.decimal "area"
+    t.decimal "perimeter"
+    t.string  "bg01_d00_",  :limit => 21
+    t.string  "bg01_d00_i", :limit => 21
+    t.string  "state"
+    t.string  "county"
+    t.string  "tract"
+    t.string  "blkgroup"
+    t.string  "name"
+    t.string  "lsad"
+    t.string  "lsad_trans"
+    t.string  "the_geom"
+    t.point   "the_point",  :limit => nil
+    t.integer "pop"
+    t.integer "state_i"
+    t.integer "county_i"
+    t.integer "tract_i"
+    t.integer "blkgroup_i"
   end
 
   add_index "bgs", ["state", "county", "tract", "blkgroup"], :name => "blockgroup_compound_id"
@@ -47,12 +47,12 @@ ActiveRecord::Schema.define(:version => 3) do
   add_index "bgs", ["the_point"], :name => "bg_new_id1", :spatial => true
 
   create_table "cd110", :primary_key => "gid", :force => true do |t|
-    t.string   "state",      :limit => 2
-    t.string   "cd",         :limit => 2
-    t.string   "lsad",       :limit => 2
-    t.string   "name",       :limit => 90
-    t.string   "lsad_trans", :limit => 50
-    t.geometry "the_geom",   :limit => nil
+    t.string        "state",      :limit => 2
+    t.string        "cd",         :limit => 2
+    t.string        "lsad",       :limit => 2
+    t.string        "name",       :limit => 90
+    t.string        "lsad_trans", :limit => 50
+    t.multi_polygon "the_geom",   :limit => nil
   end
 
   create_table "districts", :force => true do |t|
@@ -77,20 +77,21 @@ ActiveRecord::Schema.define(:version => 3) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.geometry "geometry",    :limit => nil
+    t.boolean  "editable",                   :default => true
   end
 
   create_table "states", :primary_key => "gid", :force => true do |t|
-    t.decimal  "area"
-    t.decimal  "perimeter"
-    t.integer  "st99_d00_",  :limit => 8
-    t.integer  "st99_d00_i", :limit => 8
-    t.string   "state",      :limit => 2
-    t.string   "name",       :limit => 90
-    t.string   "lsad",       :limit => 2
-    t.string   "region",     :limit => 1
-    t.string   "division",   :limit => 1
-    t.string   "lsad_trans", :limit => 50
-    t.geometry "the_geom",   :limit => nil
+    t.decimal       "area"
+    t.decimal       "perimeter"
+    t.integer       "st99_d00_",  :limit => 8
+    t.integer       "st99_d00_i", :limit => 8
+    t.string        "state",      :limit => 2
+    t.string        "name",       :limit => 90
+    t.string        "lsad",       :limit => 2
+    t.string        "region",     :limit => 1
+    t.string        "division",   :limit => 1
+    t.string        "lsad_trans", :limit => 50
+    t.multi_polygon "the_geom",   :limit => nil
   end
 
   create_table "unsaved_sketches", :force => true do |t|
