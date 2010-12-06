@@ -17,7 +17,7 @@ class Sketch < ActiveRecord::Base
 
   # === Scopes
 
-  scope :recent, order('created_at DESC').limit(25)
+  scope :recent, order('created_at DESC').limit(50)
   scope :gallery, where(:gallery => true)
 
   # == Class Methods ==

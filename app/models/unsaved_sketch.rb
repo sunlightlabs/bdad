@@ -16,7 +16,7 @@ class UnsavedSketch < ActiveRecord::Base
 
   # === Scopes
 
-  scope :recent, order("created_at DESC").limit(10)
+  scope :recent, order("created_at DESC").limit(50)
 
   # == Class Methods ==
   # ...
