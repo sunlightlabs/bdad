@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 4) do
+ActiveRecord::Schema.define(:version => 5) do
 
   create_table "awards", :id => false, :force => true do |t|
     t.string  "name",      :limit => nil
@@ -78,6 +78,8 @@ ActiveRecord::Schema.define(:version => 4) do
     t.datetime "updated_at"
     t.geometry "geometry",    :limit => nil
     t.boolean  "editable",                   :default => true
+    t.integer  "quality"
+    t.integer  "hilarity"
   end
 
   create_table "states", :primary_key => "gid", :force => true do |t|

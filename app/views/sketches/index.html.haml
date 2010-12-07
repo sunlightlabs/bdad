@@ -11,6 +11,8 @@
         %th.reviewed Reviewed?
         %th.appropriate Appropriate?
         %th.gallery Gallery?
+        %th.quality Quality
+        %th.hilarity Hilarity
         %th Title
         %th Byline
         %th District
@@ -23,6 +25,8 @@
             %td.reviewed= boolean_markup(sketch.reviewed)
             %td.appropriate= boolean_markup(sketch.appropriate)
             %td.gallery= boolean_markup(sketch.gallery)
+            %td.quality= sketch.quality
+            %td.hilarity= sketch.hilarity
             %td= sketch.title
             %td= sketch.byline
             %td= sketch.district.combined_code
